@@ -54,7 +54,7 @@ export default function PilotStatusBadge({ className = '', showDetails = false }
 }
 
 export function PilotRestrictionBadge({ feature, className = '' }: { feature: string; className?: string }) {
-  const { upgradeToPremium } = usePilot();
+  // const { upgradeToPremium } = usePilot(); // Unused for now
 
   return (
     <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-red-500 text-white ${className}`}>

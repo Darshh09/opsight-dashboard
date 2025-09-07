@@ -271,7 +271,7 @@ export default function SignInPage() {
             className="text-center mt-8"
           >
             <p className="text-gray-600 dark:text-gray-400">
-              Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
               <button
                 onClick={() => router.push('/auth/signup')}
                 className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-semibold transition-colors"

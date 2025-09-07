@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
       }
       return session
     },
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       // Auto-create usage tracking for new users
       if (account?.provider === 'google') {
         try {

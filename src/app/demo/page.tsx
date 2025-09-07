@@ -236,7 +236,7 @@ export default function DemoPage() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
             >
-              See What's Possible
+              See What&apos;s Possible
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -487,11 +487,11 @@ export default function DemoPage() {
             </motion.div>
 
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-              Let's Build Your
+              Let&apos;s Build Your
               <span className="block">Custom Dashboard 🚀</span>
             </h2>
             <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-              Ready to transform your business with AI-powered insights? Let's start with a free pilot build.
+              Ready to transform your business with AI-powered insights? Let&apos;s start with a free pilot build.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">

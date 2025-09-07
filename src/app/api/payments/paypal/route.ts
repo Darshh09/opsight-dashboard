@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { planId, plan } = await request.json()
+    const { planId } = await request.json()
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email }
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       subscriptionId: subscription.id,
-      approvalUrl: subscription.links.find((link: any) => link.rel === 'approve')?.href
+      approvalUrl: subscription.links.find((link: Record<string, unknown>) => link.rel === 'approve')?.href
     })
   } catch (error) {
     console.error('PayPal payment error:', error)

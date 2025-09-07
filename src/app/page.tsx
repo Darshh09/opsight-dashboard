@@ -68,13 +68,13 @@ export default function LandingPage() {
   const problems = [
     {
       problem: "Blind to Revenue Trends",
-      description: "You don't know if your business is really growing or declining until it's too late → lose $$$",
+      description: "You don&apos;t know if your business is really growing or declining until it&apos;s too late → lose $$$",
       icon: TrendingDown,
       color: "from-red-500 to-pink-500"
     },
     {
       problem: "High Customer Churn",
-      description: "Customers are leaving, but you don't know why or when",
+      description: "Customers are leaving, but you don&apos;t know why or when",
       icon: Users,
       color: "from-orange-500 to-red-500"
     },
@@ -824,7 +824,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
               About the Builder
             </motion.div>
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Hi, I'm Darshit 👋
+              Hi, I&apos;m Darshit 👋
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
               I specialize in building AI-powered dashboards & SaaS tools. With experience in Next.js, Node.js, microservices, and analytics, I help businesses unlock growth with real-time insights.
@@ -869,7 +869,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
               className="space-y-6"
             >
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-8 border border-blue-200 dark:border-blue-800">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Let's Connect</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Let&apos;s Connect</h3>
                 <div className="space-y-4">
                   <motion.a
                     whileHover={{ scale: 1.05 }}
@@ -1049,11 +1049,11 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
             </motion.div>
 
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-              Let's Build Your
+              Let&apos;s Build Your
               <span className="block">Custom Dashboard 🚀</span>
             </h2>
             <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-              Ready to transform your business with AI-powered insights? Let's start with a free pilot build.
+              Ready to transform your business with AI-powered insights? Let&apos;s start with a free pilot build.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">

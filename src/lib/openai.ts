@@ -4,7 +4,7 @@ export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-export async function generateAIInsight(prompt: string, context?: any): Promise<string> {
+export async function generateAIInsight(prompt: string, context?: Record<string, unknown>): Promise<string> {
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4",

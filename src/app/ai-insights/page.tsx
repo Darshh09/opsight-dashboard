@@ -48,7 +48,8 @@ const presetPrompts = [
 ];
 
 export default function AIInsightsPage() {
-  const { isPilotMode, pilotLimits, usage, useAiQuery, upgradeToPremium } = usePilot();
+  const { isPilotMode, pilotLimits } = usePilot();
+  const { canUseAiQuery, useAiQuery } = useAiQuery();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -73,7 +74,7 @@ export default function AIInsightsPage() {
     if (!content.trim()) return;
 
     // Check pilot restrictions
-    if (isPilotMode && !useAiQuery()) {
+    if (isPilotMode && !canUseAiQuery) {
       const limitMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',

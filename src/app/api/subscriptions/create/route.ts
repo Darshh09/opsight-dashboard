@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const { priceId, plan } = await request.json()
 
     // Get or create user
-    let user = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: session.user.email },
       include: { subscription: true }
     })

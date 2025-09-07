@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Check, CreditCard, Zap, Crown, Lock } from 'lucide-react';
+import { X, Check, CreditCard, Zap, Crown } from 'lucide-react';
 
 interface UpgradeModalProps {
   isOpen: boolean;
@@ -70,7 +70,7 @@ const plans = [
   }
 ];
 
-export default function UpgradeModal({ isOpen, onClose, currentPlan = 'pilot' }: UpgradeModalProps) {
+export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
   const [selectedPlan, setSelectedPlan] = useState('pro');
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('stripe');
   const [isLoading, setIsLoading] = useState(false);

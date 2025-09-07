@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { planId, plan, amount, currency = 'INR' } = await request.json()
+    const { planId, amount, currency = 'INR' } = await request.json()
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email }

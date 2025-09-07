@@ -22,7 +22,6 @@ interface CustomBuildRequestProps {
 }
 
 export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildRequestProps) {
-  if (!isOpen) return null;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,6 +38,8 @@ export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildReque
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  if (!isOpen) return null;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -111,7 +112,7 @@ export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildReque
             Request Submitted!
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Thank you for your interest! I'll review your requirements and get back to you within 24 hours with a custom proposal.
+            Thank you for your interest! I&apos;ll review your requirements and get back to you within 24 hours with a custom proposal.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -171,7 +172,7 @@ export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildReque
         <div className="p-8">
           {/* Features Preview */}
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">What You'll Get</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">What You&apos;ll Get</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {features.map((feature, index) => (
                 <motion.div
@@ -354,7 +355,7 @@ export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildReque
                   required
                   rows={3}
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white resize-none"
-                  placeholder="What's your biggest challenge with data and analytics right now?"
+                  placeholder="What&apos;s your biggest challenge with data and analytics right now?"
                 />
               </div>
 
@@ -416,7 +417,7 @@ export default function CustomBuildRequest({ isOpen, onClose }: CustomBuildReque
                   <option value="5k-10k">$5K - $10K</option>
                   <option value="10k-25k">$10K - $25K</option>
                   <option value="25k+">$25K+</option>
-                  <option value="discuss">Let's discuss</option>
+                  <option value="discuss">Let&apos;s discuss</option>
                 </select>
               </div>
 

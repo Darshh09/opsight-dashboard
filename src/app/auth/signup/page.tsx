@@ -168,7 +168,7 @@ export default function SignUpPage() {
               <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>
-              <span className="font-semibold text-gray-900 dark:text-white">What's Included</span>
+              <span className="font-semibold text-gray-900 dark:text-white">What&apos;s Included</span>
             </div>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>• Custom dashboard design</li>
@@ -345,7 +345,7 @@ export default function SignUpPage() {
                 {/* Biggest Challenge Field */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    What's Your Biggest Data Challenge?
+                    What&apos;s Your Biggest Data Challenge?
                   </label>
                   <textarea
                     name="biggestChallenge"
