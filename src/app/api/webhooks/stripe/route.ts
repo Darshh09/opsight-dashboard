@@ -98,8 +98,8 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     where: { stripeSubscriptionId: subscription.id },
     data: {
       status: subscription.status.toUpperCase() as 'ACTIVE' | 'CANCELED' | 'INCOMPLETE' | 'INCOMPLETE_EXPIRED' | 'PAST_DUE' | 'TRIALING' | 'UNPAID',
-      currentPeriodStart: new Date(subscription.current_period_start * 1000),
-      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      currentPeriodStart: new Date(),
+      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
     },
   })
@@ -115,9 +115,10 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 }
 
 async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
-  if (invoice.subscription) {
+  const subscriptionId = (invoice as any).subscription;
+  if (subscriptionId && typeof subscriptionId === 'string') {
     await prisma.subscription.update({
-      where: { stripeSubscriptionId: invoice.subscription as string },
+      where: { stripeSubscriptionId: subscriptionId },
       data: {
         status: 'ACTIVE',
       },
