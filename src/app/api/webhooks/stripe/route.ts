@@ -70,8 +70,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       stripeSubscriptionId: session.subscription as string,
       status: 'ACTIVE',
       plan: plan.toUpperCase() as 'BASIC' | 'PRO' | 'ENTERPRISE',
-      currentPeriodStart: new Date(session.subscription_details?.current_period_start * 1000),
-      currentPeriodEnd: new Date(session.subscription_details?.current_period_end * 1000),
+      currentPeriodStart: new Date(),
+      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
     },
   })
 

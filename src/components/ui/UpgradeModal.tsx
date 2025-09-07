@@ -157,7 +157,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
             <div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Currently on Pilot Plan</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                You're using the free pilot with limited features. Upgrade to unlock unlimited access.
+                You&apos;re using the free pilot with limited features. Upgrade to unlock unlimited access.
               </p>
             </div>
           </div>

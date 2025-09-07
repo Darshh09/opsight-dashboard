@@ -48,8 +48,8 @@ const presetPrompts = [
 ];
 
 export default function AIInsightsPage() {
-  const { isPilotMode, pilotLimits } = usePilot();
-  const { canUseAiQuery, useAiQuery } = useAiQuery();
+  const { isPilotMode, pilotLimits, useAiQuery } = usePilot();
+  const canUseAiQuery = useAiQuery(); // Call hook at component level
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
