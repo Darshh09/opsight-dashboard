@@ -180,7 +180,7 @@ export default function DropoffChart({ data, className = '', showAverage = true,
             <LabelList
               dataKey="dropoff"
               position="right"
-              formatter={(value: any) => `${value.toFixed(1)}%`}
+              formatter={(value: number) => `${value.toFixed(1)}%`}
               style={{
                 fill: '#111827',
                 fontWeight: '700',

@@ -69,7 +69,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     data: {
       stripeSubscriptionId: session.subscription as string,
       status: 'ACTIVE',
-      plan: plan.toUpperCase() as any,
+      plan: plan.toUpperCase() as 'BASIC' | 'PRO' | 'ENTERPRISE',
       currentPeriodStart: new Date(session.subscription_details?.current_period_start * 1000),
       currentPeriodEnd: new Date(session.subscription_details?.current_period_end * 1000),
     },
@@ -97,7 +97,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   await prisma.subscription.update({
     where: { stripeSubscriptionId: subscription.id },
     data: {
-      status: subscription.status.toUpperCase() as any,
+      status: subscription.status.toUpperCase() as 'ACTIVE' | 'CANCELED' | 'INCOMPLETE' | 'INCOMPLETE_EXPIRED' | 'PAST_DUE' | 'TRIALING' | 'UNPAID',
       currentPeriodStart: new Date(subscription.current_period_start * 1000),
       currentPeriodEnd: new Date(subscription.current_period_end * 1000),
       cancelAtPeriodEnd: subscription.cancel_at_period_end,

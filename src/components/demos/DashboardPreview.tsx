@@ -409,7 +409,7 @@ export default function DashboardPreview() {
                 key={item.id}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleViewChange(item.id as any)}
+                onClick={() => handleViewChange(item.id as 'overview' | 'sales' | 'leads' | 'ai-insights' | 'reports' | 'settings')}
                 disabled={isLoading}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                   currentView === item.id
@@ -475,7 +475,7 @@ export default function DashboardPreview() {
               Ready to get your own custom dashboard?
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              This preview shows just a fraction of what's possible with your data.
+              This preview shows just a fraction of what&apos;s possible with your data.
             </p>
           </div>
           <div className="flex space-x-4">

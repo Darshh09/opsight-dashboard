@@ -362,7 +362,7 @@ export default function FullDashboardPreview() {
                   key={item.id}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleViewChange(item.id as any)}
+                  onClick={() => handleViewChange(item.id as 'overview' | 'sales' | 'leads' | 'ai-insights' | 'reports' | 'settings')}
                   disabled={isLoading}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                     currentView === item.id

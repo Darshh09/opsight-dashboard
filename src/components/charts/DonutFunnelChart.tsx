@@ -105,7 +105,7 @@ export default function DonutFunnelChart({ data, totalLabel = 'Total', className
                 backdropFilter: 'blur(20px)',
                 fontSize: '13px'
               }}
-              formatter={(value: number, name: string, props: any) => [
+              formatter={(value: number, name: string) => [
                 value.toLocaleString(),
                 name
               ]}

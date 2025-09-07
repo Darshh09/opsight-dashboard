@@ -8,7 +8,7 @@ interface FunnelStage {
   count: number;
   percentage: number;
   color: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   description: string;
 }
 
