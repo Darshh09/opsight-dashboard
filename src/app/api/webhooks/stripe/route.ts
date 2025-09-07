@@ -97,7 +97,11 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   await prisma.subscription.update({
     where: { stripeSubscriptionId: subscription.id },
     data: {
-      status: subscription.status.toUpperCase() as 'ACTIVE' | 'CANCELED' | 'INCOMPLETE' | 'INCOMPLETE_EXPIRED' | 'PAST_DUE' | 'TRIALING' | 'UNPAID',
+      status: (subscription.status === 'active' ? 'ACTIVE' :
+               subscription.status === 'canceled' ? 'CANCELED' :
+               subscription.status === 'past_due' ? 'PAST_DUE' :
+               subscription.status === 'unpaid' ? 'UNPAID' :
+               'TRIAL') as 'ACTIVE' | 'CANCELED' | 'PAST_DUE' | 'UNPAID' | 'TRIAL',
       currentPeriodStart: new Date(),
       currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
@@ -115,7 +119,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 }
 
 async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
-  const subscriptionId = (invoice as any).subscription;
+  const subscriptionId = (invoice as unknown as Record<string, unknown>).subscription;
   if (subscriptionId && typeof subscriptionId === 'string') {
     await prisma.subscription.update({
       where: { stripeSubscriptionId: subscriptionId },
@@ -127,9 +131,10 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
 }
 
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
-  if (invoice.subscription) {
+  const subscriptionId = (invoice as unknown as Record<string, unknown>).subscription;
+  if (subscriptionId && typeof subscriptionId === 'string') {
     await prisma.subscription.update({
-      where: { stripeSubscriptionId: invoice.subscription as string },
+      where: { stripeSubscriptionId: subscriptionId },
       data: {
         status: 'PAST_DUE',
       },

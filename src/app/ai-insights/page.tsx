@@ -8,14 +8,12 @@ import {
   TrendingUp,
   Users,
   DollarSign,
-  AlertTriangle,
-  Lock,
-  Crown
+  AlertTriangle
 } from 'lucide-react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import ChartCard from '@/components/ui/ChartCard';
 import { usePilot } from '@/contexts/PilotContext';
-import PilotStatusBadge, { PilotRestrictionBadge } from '@/components/ui/PilotStatusBadge';
+import PilotStatusBadge from '@/components/ui/PilotStatusBadge';
 
 interface Message {
   id: string;

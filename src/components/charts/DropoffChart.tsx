@@ -1,7 +1,7 @@
 'use client';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList, ReferenceLine } from 'recharts';
-import { TrendingDown, AlertTriangle, Info } from 'lucide-react';
+import { TrendingDown } from 'lucide-react';
 
 interface DropoffDatum {
   stage: string;
@@ -180,7 +180,7 @@ export default function DropoffChart({ data, className = '', showAverage = true,
             <LabelList
               dataKey="dropoff"
               position="right"
-              formatter={(value: number) => `${value.toFixed(1)}%`}
+              formatter={(value: unknown) => `${(value as number).toFixed(1)}%`}
               style={{
                 fill: '#111827',
                 fontWeight: '700',

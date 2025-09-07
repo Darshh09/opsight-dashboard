@@ -99,8 +99,8 @@ model AlertRule {
   threshold   Float
   condition   String   // 'above' or 'below'
   channel     String   // 'email' or 'slack'
-  recipients  String[] // Array of email addresses or Slack channels
-  status      String   @default('active') // 'active' or 'inactive'
+  recipients  String[]
+  status      String   @default("active")
   lastTriggered DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -113,7 +113,7 @@ model CsvUpload {
   userId    String
   fileName  String
   fileSize  Int
-  status    String   @default('uploaded') // 'uploaded', 'processing', 'completed', 'failed'
+  status    String   @default("uploaded")
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -126,8 +126,8 @@ model Payment {
   paypalPaymentId   String?
   razorpayPaymentId String?
   amount            Float
-  currency          String   @default('usd')
-  status            String   // 'pending', 'succeeded', 'failed', 'canceled'
+  currency          String   @default("usd")
+  status            String
   plan              String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

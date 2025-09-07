@@ -7,14 +7,14 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || 'demo-google-client-id',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'demo-google-client-secret',
     }),
   ],
   callbacks: {
     async session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id
+      if (session.user && user) {
+        (session.user as { id: string }).id = user.id
       }
       return session
     },
@@ -46,9 +46,9 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/auth/signin',
-    signUp: '/auth/signup',
   },
   session: {
     strategy: 'database',
   },
+  secret: process.env.NEXTAUTH_SECRET || 'demo-nextauth-secret',
 }

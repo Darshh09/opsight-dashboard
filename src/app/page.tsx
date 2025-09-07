@@ -6,26 +6,16 @@ import { useRouter } from 'next/navigation';
 import {
   Brain,
   BarChart3,
-  Shield,
   ArrowRight,
   Sparkles,
   Check,
-  Star,
   Users,
   TrendingUp,
   TrendingDown,
-  Zap,
-  Lock,
-  Crown,
   Play,
-  ChevronRight,
   Mail,
   Phone,
-  MessageSquare,
   Rocket,
-  Target,
-  Globe,
-  Award,
   Clock,
   DollarSign,
   XCircle,
@@ -34,17 +24,16 @@ import {
   Github,
   Linkedin,
   ExternalLink,
-  Eye,
   Code,
   Database,
-  Settings,
-  X
+  X,
+  Crown
 } from 'lucide-react';
 import FullDashboardPreview from '@/components/demos/FullDashboardPreview';
 
 export default function LandingPage() {
   const router = useRouter();
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [, ] = useState(false);
   const [showDashboardPreview, setShowDashboardPreview] = useState(false);
   const { scrollYProgress } = useScroll();
   const heroRef = useRef(null);
@@ -1112,7 +1101,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
             <div>
               <h3 className="text-lg font-semibold mb-6">Product</h3>
               <ul className="space-y-3 text-gray-400">
-                {['Services', 'Process', 'About', 'Contact'].map((item, index) => (
+                {['Services', 'Process', 'About', 'Contact'].map((item) => (
                   <motion.li
                     key={item}
                     whileHover={{ x: 5, color: "#ffffff" }}
@@ -1129,7 +1118,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
             <div>
               <h3 className="text-lg font-semibold mb-6">Services</h3>
               <ul className="space-y-3 text-gray-400">
-                {['Pilot Build', 'Custom Dashboard', 'Ongoing Support', 'Consulting'].map((item, index) => (
+                {['Pilot Build', 'Custom Dashboard', 'Ongoing Support', 'Consulting'].map((item) => (
                   <motion.li
                     key={item}
                     whileHover={{ x: 5, color: "#ffffff" }}

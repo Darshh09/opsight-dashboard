@@ -8,14 +8,9 @@ import {
   CheckCircle,
   Upload,
   Download,
-  FileText,
-  TrendingUp,
-  Users,
-  Target,
-  Lock,
-  Crown
+  FileText
 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+// Recharts imports removed as they are not currently used
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import EnhancedChartCard from '@/components/ui/EnhancedChartCard';
 import AIInsightsBox from '@/components/ui/AIInsightsBox';
@@ -23,7 +18,7 @@ import FunnelChart from '@/components/charts/FunnelChart';
 import DropoffChart from '@/components/charts/DropoffChart';
 import DonutFunnelChart from '@/components/charts/DonutFunnelChart';
 import { usePilot } from '@/contexts/PilotContext';
-import PilotStatusBadge, { PilotRestrictionBadge } from '@/components/ui/PilotStatusBadge';
+import PilotStatusBadge from '@/components/ui/PilotStatusBadge';
 
 // Enhanced funnel data with icons and descriptions
 const funnelData = [
@@ -77,7 +72,7 @@ const funnelDistributionData = [
 ];
 
 export default function LeadsPage() {
-  const { isPilotMode, pilotLimits, canUploadCsv, upgradeToPremium } = usePilot();
+  const { isPilotMode, pilotLimits, canUploadCsv } = usePilot();
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 

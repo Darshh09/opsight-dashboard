@@ -1,6 +1,6 @@
 'use client';
 
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { Users, TrendingUp, Target, Zap } from 'lucide-react';
 
 interface DonutDatum {
@@ -142,7 +142,7 @@ export default function DonutFunnelChart({ data, totalLabel = 'Total', className
       {/* Enhanced Legend with Metrics */}
       <div className="mt-8 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data.map((stage, index) => {
+          {data.map((stage) => {
             const percentage = ((stage.count / total) * 100);
             const trend = stage.previousCount ? stage.count - stage.previousCount : 0;
             const isImproving = trend > 0;

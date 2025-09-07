@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Brain, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, User, Check } from 'lucide-react';
+import { Brain, Mail, ArrowRight, Sparkles, User, Check } from 'lucide-react';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function SignUpPage() {
 
       // Redirect to dashboard after successful pilot application
       router.push('/dashboard');
-    } catch (error) {
+    } catch {
       setError('Failed to submit pilot application. Please try again.');
     } finally {
       setIsLoading(false);
@@ -59,7 +59,7 @@ export default function SignUpPage() {
     setIsLoading(true);
     try {
       await signIn('google', { callbackUrl: '/dashboard' });
-    } catch (error) {
+    } catch {
       setError('Failed to sign up with Google');
       setIsLoading(false);
     }

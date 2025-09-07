@@ -6,7 +6,6 @@ import {
   X,
   Send,
   CheckCircle,
-  AlertCircle,
   Building2,
   Users,
   BarChart3,

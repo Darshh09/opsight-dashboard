@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { signIn, getSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Brain, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -31,7 +31,7 @@ export default function SignInPage() {
       } else {
         router.push('/dashboard');
       }
-    } catch (error) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
@@ -42,7 +42,7 @@ export default function SignInPage() {
     setIsLoading(true);
     try {
       await signIn('google', { callbackUrl: '/dashboard' });
-    } catch (error) {
+    } catch {
       setError('Failed to sign in with Google');
       setIsLoading(false);
     }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { TrendingDown, Users, UserPlus, CreditCard, CheckCircle } from 'lucide-react';
+import { TrendingDown, Users, CreditCard, CheckCircle } from 'lucide-react';
 
 interface FunnelStage {
   stage: string;
@@ -40,7 +40,7 @@ export default function FunnelChart({ data, className = '' }: FunnelChartProps) 
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     isHovered ? 'scale-110' : 'scale-100'
                   }`} style={{ backgroundColor: stage.color + '20' }}>
-                    <Icon className={`h-5 w-5 transition-colors duration-300`} style={{ color: stage.color }} />
+                    <Icon className={`h-5 w-5 transition-colors duration-300`} />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Users, DollarSign, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Users, DollarSign, Clock, CheckCircle } from 'lucide-react';
 
 export default function AgencyDashboardDemo() {
   const metrics = [
@@ -157,7 +157,7 @@ export default function AgencyDashboardDemo() {
               Next report scheduled for Monday 9:00 AM.
             </p>
             <div className="flex flex-wrap gap-2">
-              {['PDF Report', 'Email Delivery', 'Slack Integration', 'Custom Branding'].map((feature, index) => (
+              {['PDF Report', 'Email Delivery', 'Slack Integration', 'Custom Branding'].map((feature) => (
                 <span
                   key={feature}
                   className="px-3 py-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm border border-gray-200 dark:border-gray-600"

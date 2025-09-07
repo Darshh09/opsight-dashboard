@@ -8,40 +8,22 @@ import {
   Users,
   DollarSign,
   AlertTriangle,
-  CheckCircle,
   BarChart3,
   Brain,
   Settings,
   Bell,
   ArrowRight,
   Home,
-  ShoppingCart,
   UserCheck,
   Activity,
   Zap,
   Shield,
-  Clock,
   Target,
-  Star,
-  Eye,
-  EyeOff,
-  X,
-  Calendar,
-  Mail,
-  Phone,
-  Globe,
-  Database,
-  Code,
-  Layers,
   PieChart,
   LineChart,
-  MousePointer,
-  Filter,
   Download,
   Share2,
   RefreshCw,
-  Plus,
-  Minus,
   Maximize2,
   Minimize2
 } from 'lucide-react';
@@ -219,7 +201,7 @@ export default function FullDashboardPreview() {
               Consider implementing automated retry logic to recover an estimated $2,300 in lost revenue.
             </p>
             <div className="flex flex-wrap gap-2">
-              {['Revenue Optimization', 'Churn Prevention', 'Growth Opportunities'].map((insight, index) => (
+              {['Revenue Optimization', 'Churn Prevention', 'Growth Opportunities'].map((insight) => (
                 <span
                   key={insight}
                   className="px-3 py-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm border border-gray-200 dark:border-gray-600"
@@ -362,7 +344,7 @@ export default function FullDashboardPreview() {
                   key={item.id}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleViewChange(item.id as 'overview' | 'sales' | 'leads' | 'ai-insights' | 'reports' | 'settings')}
+                  onClick={() => handleViewChange(item.id as 'overview' | 'sales' | 'leads' | 'ai' | 'settings' | 'reports')}
                   disabled={isLoading}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                     currentView === item.id

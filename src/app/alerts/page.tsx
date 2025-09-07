@@ -12,14 +12,13 @@ import {
   CheckCircle,
   Clock,
   Settings,
-  Lock,
-  Crown
+  Lock
 } from 'lucide-react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import ChartCard from '@/components/ui/ChartCard';
 import AIInsightsBox from '@/components/ui/AIInsightsBox';
 import { usePilot } from '@/contexts/PilotContext';
-import PilotStatusBadge, { PilotRestrictionBadge } from '@/components/ui/PilotStatusBadge';
+import PilotStatusBadge from '@/components/ui/PilotStatusBadge';
 
 interface AlertRule {
   id: string;
@@ -69,7 +68,7 @@ const initialAlertRules: AlertRule[] = [
 ];
 
 export default function AlertsPage() {
-  const { isPilotMode, pilotLimits, usage, canCreateAlert, upgradeToPremium } = usePilot();
+  const { pilotLimits, canCreateAlert } = usePilot();
   const [alertRules, setAlertRules] = useState<AlertRule[]>(initialAlertRules);
   const [showModal, setShowModal] = useState(false);
   const [editingRule, setEditingRule] = useState<AlertRule | null>(null);

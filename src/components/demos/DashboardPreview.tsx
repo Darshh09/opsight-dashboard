@@ -9,31 +9,16 @@ import {
   Users,
   DollarSign,
   AlertTriangle,
-  CheckCircle,
-  BarChart3,
   Brain,
-  Settings,
   Bell,
   ArrowRight,
-  Play,
-  Pause,
-  RotateCcw,
   Home,
-  ShoppingCart,
   UserCheck,
-  Activity,
-  Zap,
-  Shield,
-  Clock,
-  Target,
-  Star,
-  Eye,
-  EyeOff,
-  X
+  Target
 } from 'lucide-react';
 
 export default function DashboardPreview() {
-  const [currentView, setCurrentView] = useState<'overview' | 'sales' | 'leads' | 'ai'>('overview');
+  const [currentView, setCurrentView] = useState<'overview' | 'sales' | 'leads' | 'ai-insights' | 'reports' | 'settings'>('overview');
   const [showCustomBuildForm, setShowCustomBuildForm] = useState(false);
   const [isLive, setIsLive] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +32,7 @@ export default function DashboardPreview() {
   }, []);
 
   // Handle view change with loading state
-  const handleViewChange = (view: 'overview' | 'sales' | 'leads' | 'ai') => {
+  const handleViewChange = (view: 'overview' | 'sales' | 'leads' | 'ai-insights' | 'reports' | 'settings') => {
     setIsLoading(true);
     setTimeout(() => {
       setCurrentView(view);
@@ -75,7 +60,7 @@ export default function DashboardPreview() {
     { id: 'overview', label: 'Overview', icon: Home, color: 'text-blue-600' },
     { id: 'sales', label: 'Sales', icon: DollarSign, color: 'text-green-600' },
     { id: 'leads', label: 'Leads', icon: UserCheck, color: 'text-purple-600' },
-    { id: 'ai', label: 'AI Insights', icon: Brain, color: 'text-pink-600' }
+    { id: 'ai-insights', label: 'AI Insights', icon: Brain, color: 'text-pink-600' }
   ];
 
   const recentTransactions = [
@@ -356,7 +341,7 @@ export default function DashboardPreview() {
           return renderSales();
         case 'leads':
           return renderLeads();
-        case 'ai':
+        case 'ai-insights':
           return renderAI();
         default:
           return renderOverview();
