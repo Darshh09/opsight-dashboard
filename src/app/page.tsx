@@ -1152,7 +1152,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
                   className="flex items-center space-x-3"
                 >
                   <Mail className="h-4 w-4" />
-                        <span>hello@darshitshukla.com</span>
+                        <span>darshitshukla1777@gmail.com</span>
                 </motion.li>
                 <motion.li
                   whileHover={{ x: 5, color: "#ffffff" }}
@@ -1160,7 +1160,7 @@ Custom AI-Powered Dashboards for SaaS, E-commerce & Agencies
                   className="flex items-center space-x-3"
                 >
                   <Phone className="h-4 w-4" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 9131371800</span>
                 </motion.li>
               </ul>
             </div>
