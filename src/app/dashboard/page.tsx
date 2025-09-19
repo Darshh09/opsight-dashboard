@@ -1,18 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useCallback, Suspense, lazy } from 'react';
 import {
   DollarSign,
   Users,
   XCircle,
-  TrendingDown
+  TrendingDown,
+  LucideIcon
 } from 'lucide-react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import KPICard from '@/components/ui/KPICard';
 import EnhancedChartCard from '@/components/ui/EnhancedChartCard';
 import AIInsightsBox from '@/components/ui/AIInsightsBox';
-import RevenueChart from '@/components/charts/RevenueChart';
-import CustomerChart from '@/components/charts/CustomerChart';
+import { ChartSkeleton, KPISkeleton } from '@/components/ui/LoadingSkeleton';
+import { PerformanceCard } from '@/components/ui/PerformanceCard';
+
+// Lazy load heavy chart components
+const RevenueChart = lazy(() => import('@/components/charts/RevenueChart'));
+const CustomerChart = lazy(() => import('@/components/charts/CustomerChart'));
 
 // Dummy data for Week 1
 const revenueData = [
@@ -33,11 +38,62 @@ const customerData = [
   { month: 'Jun', customers: 73 },
 ];
 
+// Memoized KPI Card component
+const MemoizedKPICard = memo(function MemoizedKPICard({
+  title,
+  value,
+  change,
+  trend,
+  icon: Icon,
+  color
+}: {
+  title: string;
+  value: string;
+  change: string;
+  trend: 'up' | 'down' | 'neutral';
+  icon: LucideIcon;
+  color: string;
+}) {
+  // Convert string change to KPICard format
+  const changeValue = parseFloat(change.replace(/[+%-]/g, ''));
+  const isPositive = change.startsWith('+') || (change.startsWith('-') && trend === 'up');
+
+  return (
+    <PerformanceCard className="p-6" hover={true}>
+      <KPICard
+        title={title}
+        value={value}
+        change={{ value: changeValue, isPositive }}
+        icon={Icon}
+        color={color as 'blue' | 'green' | 'red' | 'yellow' | 'purple'}
+      />
+    </PerformanceCard>
+  );
+});
+
+// Memoized Chart Card component
+const MemoizedChartCard = memo(function MemoizedChartCard({
+  title,
+  children
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <PerformanceCard className="p-6" hover={true}>
+      <EnhancedChartCard title={title}>
+        {children}
+      </EnhancedChartCard>
+    </PerformanceCard>
+  );
+});
+
 export default function DashboardPage() {
   const [aiInsights, setAiInsights] = useState<string>('');
   const [isLoadingInsights, setIsLoadingInsights] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
-  useEffect(() => {
+  const loadAIInsights = useCallback(() => {
     // Simulate AI insights generation
     const timer = setTimeout(() => {
       setAiInsights(
@@ -48,6 +104,20 @@ export default function DashboardPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Simulate page loading
+    const pageTimer = setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1000);
+
+    const insightsCleanup = loadAIInsights();
+
+    return () => {
+      clearTimeout(pageTimer);
+      insightsCleanup();
+    };
+  }, [loadAIInsights]);
 
   return (
     <DashboardLayout>
@@ -68,44 +138,51 @@ export default function DashboardPage() {
             📈 Business Health at a Glance
           </h2>
 
-            {/* Good news first - Growth metrics */}
+          {isPageLoading ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <KPICard
+              {Array.from({ length: 4 }).map((_, index) => (
+                <KPISkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <MemoizedKPICard
                 title="Monthly Recurring Revenue"
                 value="$25,600"
-                change={{ value: 28, isPositive: true }}
+                change="+28%"
+                trend="up"
                 icon={DollarSign}
                 color="blue"
-                subtitle="Up from $20,000 last month"
               />
 
-              <KPICard
+              <MemoizedKPICard
                 title="New Customers"
                 value="142"
-                change={{ value: 12, isPositive: true }}
+                change="+12%"
+                trend="up"
                 icon={Users}
                 color="green"
-                subtitle="12 new enterprise customers this month"
               />
 
-              <KPICard
+              <MemoizedKPICard
                 title="Failed Payments"
                 value="8"
-                change={{ value: 15, isPositive: false }}
+                change="-15%"
+                trend="up"
                 icon={XCircle}
                 color="red"
-                subtitle="Down from 9 last month"
               />
 
-              <KPICard
+              <MemoizedKPICard
                 title="Customer Churn"
                 value="2.1%"
-                change={{ value: 0.3, isPositive: false }}
+                change="-0.3%"
+                trend="up"
                 icon={TrendingDown}
-                color="yellow"
-                subtitle="Slight increase from 1.8%"
+                color="green"
               />
             </div>
+          )}
         </div>
 
         {/* Enhanced Charts with beautiful styling */}
@@ -115,23 +192,17 @@ export default function DashboardPage() {
           </h2>
 
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <EnhancedChartCard
-              title="Revenue Trend"
-              subtitle="Monthly recurring revenue growth over time"
-              trend={{ value: 28, isPositive: true, label: "vs last month" }}
-              metric={{ value: "$25,600", label: "Current MRR", color: "#3b82f6" }}
-            >
-              <RevenueChart data={revenueData} />
-            </EnhancedChartCard>
+            <MemoizedChartCard title="Revenue Trend">
+              <Suspense fallback={<ChartSkeleton />}>
+                <RevenueChart data={revenueData} />
+              </Suspense>
+            </MemoizedChartCard>
 
-            <EnhancedChartCard
-              title="Customer Growth"
-              subtitle="New customer acquisition by month"
-              trend={{ value: 12, isPositive: true, label: "vs last month" }}
-              metric={{ value: "73", label: "Total Customers", color: "#10b981" }}
-            >
-              <CustomerChart data={customerData} />
-            </EnhancedChartCard>
+            <MemoizedChartCard title="Customer Growth">
+              <Suspense fallback={<ChartSkeleton />}>
+                <CustomerChart data={customerData} />
+              </Suspense>
+            </MemoizedChartCard>
           </div>
         </div>
 
