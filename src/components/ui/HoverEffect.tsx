@@ -7,8 +7,10 @@ import {
   IconX,
   IconBrain,
   IconClock,
-  IconAlertTriangle
+  IconAlertTriangle,
+  IconCheck
 } from '@tabler/icons-react';
+import Link from "next/link";
 
 export const HoverEffect = ({
   items,
@@ -20,6 +22,7 @@ export const HoverEffect = ({
     link: string;
     icon?: React.ComponentType<{ className?: string }>;
     color?: string;
+    features?: string[];
   }[];
   className?: string;
 }) => {
@@ -33,9 +36,9 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <Link
           href={item?.link}
-          key={item?.link}
+          key={`${item?.link}-${idx}`}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -76,8 +79,18 @@ export const HoverEffect = ({
               </div>
             </div>
             <CardDescription>{item.description}</CardDescription>
+            {item.features && item.features.length > 0 && (
+              <div className="mt-4 space-y-2">
+                {item.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-center space-x-2">
+                    <IconCheck className="h-4 w-4 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-gray-300">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </Card>
-        </a>
+        </Link>
       ))}
     </div>
   );

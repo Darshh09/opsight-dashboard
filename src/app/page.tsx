@@ -31,8 +31,10 @@ import ModernButton from '@/components/ui/ModernButton';
 import { HoverBorderGradient } from '@/components/ui/HoverBorderGradient';
 import { AceternityLogo } from '@/components/ui/AceternityLogo';
 import { HoverEffect } from '@/components/ui/HoverEffect';
+import { InfiniteMovingCards } from '@/components/ui/InfiniteMovingCards';
 import HeroSection from '@/components/sections/HeroSection';
 import ProcessSection from '@/components/sections/ProcessSection';
+import CompetitiveAdvantages from '@/components/sections/CompetitiveAdvantages';
 
 // Lazy load heavy components
 const FullDashboardPreview = lazy(() => import('@/components/demos/FullDashboardPreview'));
@@ -49,9 +51,7 @@ export default function LandingPage() {
   const useCasesInView = useInView(useCasesRef, { once: true });
   const aboutInView = useInView(aboutRef, { once: true });
 
-  // Parallax transforms
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Removed unused parallax transforms
 
   const services = [
     {
@@ -138,53 +138,51 @@ export default function LandingPage() {
     }
   ];
 
+  const testimonials = [
+    {
+      quote: "Darshit built us a custom dashboard that unified all our analytics. We went from juggling 4 different tools to having everything in one place. Our team saves 10+ hours per week on reporting.",
+      name: "Sarah Chen",
+      title: "CEO, TechFlow SaaS"
+    },
+    {
+      quote: "The AI insights are incredible. It actually explains why our churn spiked last month - it was a payment gateway issue in India. We fixed it within hours instead of weeks.",
+      name: "Marcus Rodriguez",
+      title: "Founder, GrowthLab"
+    },
+    {
+      quote: "As an agency, we needed white-label dashboards for our clients. Darshit delivered exactly what we needed. Our clients love the professional look and real-time data.",
+      name: "Emily Watson",
+      title: "Director, Digital Marketing Pro"
+    },
+    {
+      quote: "The free pilot was a game-changer. We could see the value immediately before committing. Darshit's approach is refreshing - no sales pressure, just results.",
+      name: "David Kim",
+      title: "CTO, E-commerce Plus"
+    },
+    {
+      quote: "Finally, a dashboard that shows revenue, funnels, and traffic together. We can see the complete customer journey and make data-driven decisions. Worth every penny.",
+      name: "Lisa Thompson",
+      title: "VP Marketing, StartupXYZ"
+    },
+    {
+      quote: "Darshit's technical expertise is unmatched. He integrated 6 different data sources seamlessly. The dashboard updates in real-time and never breaks.",
+      name: "Alex Johnson",
+      title: "Head of Analytics, DataCorp"
+    },
+    {
+      quote: "The investor-ready reports are a lifesaver. We can generate professional PDFs in seconds for our board meetings. Our investors are impressed with the data quality.",
+      name: "Rachel Green",
+      title: "CFO, ScaleUp Ventures"
+    },
+    {
+      quote: "We tried Tableau, Power BI, and Looker. None could do what Opsight does - unify everything with AI insights. Darshit solved our analytics fragmentation problem.",
+      name: "Michael Brown",
+      title: "Head of Product, CloudTech"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10">
-        <motion.div
-          style={{ y, opacity }}
-          className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20"
-        />
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-20 left-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute bottom-20 right-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, -180, -360],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl"
-          />
-        </div>
-      </div>
+    <div className="min-h-screen text-white overflow-hidden">
 
       {/* Navigation */}
       <AdvancedNavbar />
@@ -275,6 +273,9 @@ export default function LandingPage() {
 
       {/* Process Section */}
       <ProcessSection />
+
+      {/* Competitive Advantages Section */}
+      <CompetitiveAdvantages />
 
       {/* Services Section */}
       <section ref={servicesRef} id="services" className="py-24">
@@ -406,40 +407,58 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {useCases.map((useCase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                animate={useCasesInView ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 50, rotateX: -15 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
-                  className={`w-16 h-16 bg-gradient-to-br ${useCase.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300`}
-                >
-                  <useCase.icon className="h-8 w-8 text-white" />
-                </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {useCase.title}
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-6 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
-                  {useCase.description}
-                </p>
-                <div className="space-y-2">
-                  {useCase.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center space-x-2">
-                      <IconCheck className="h-4 w-4 text-green-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-400">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <HoverEffect
+            items={useCases.map(useCase => ({
+              title: useCase.title,
+              description: useCase.description,
+              link: "#use-cases",
+              icon: useCase.icon,
+              color: useCase.color,
+              features: useCase.features
+            }))}
+            className="max-w-7xl mx-auto"
+          />
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center px-4 py-2 bg-green-900/20 text-green-300 rounded-full text-sm font-medium mb-6"
+            >
+              <IconCheck className="h-4 w-4 mr-2" />
+              Client Success Stories
+            </motion.div>
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              What Our Clients
+              <span className="block bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                Say About Us
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Real feedback from businesses that transformed their analytics with Opsight.
+            </p>
+          </motion.div>
+
+          <InfiniteMovingCards
+            items={testimonials}
+            direction="right"
+            speed="slow"
+            pauseOnHover={true}
+            className="[--duration:60s]"
+          />
         </div>
       </section>
 

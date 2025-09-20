@@ -1,0 +1,66 @@
+<!-- Save as opsight-eye.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120" role="img" aria-label="OpsSight logo">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ff2db7"/>
+      <stop offset="50%" stop-color="#9b2bff"/>
+      <stop offset="100%" stop-color="#2ea8ff"/>
+    </linearGradient>
+
+    <!-- slight glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- inner subtle shadow -->
+    <filter id="innerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feOffset dx="0" dy="1" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.2" result="blur2"/>
+      <feComposite in="SourceGraphic" in2="blur2" operator="over" result="comp"/>
+    </filter>
+  </defs>
+
+  <!-- background transparent; main outer eye shape -->
+  <g transform="translate(0,6)">
+    <!-- outer eye shape -->
+    <path d="M10 50C36 10 164 10 190 50c-26 40-154 40-180 0z"
+          fill="none"
+          stroke="url(#g)"
+          stroke-width="6"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          filter="url(#glow)"/>
+
+    <!-- inner eye lid / secondary stroke -->
+    <path d="M28 50C48 26 152 26 172 50c-20 24-124 24-144 0z"
+          fill="none"
+          stroke="rgba(255,255,255,0.02)"
+          stroke-width="2"/>
+
+    <!-- pupil ring -->
+    <circle cx="100" cy="50" r="18" fill="url(#g)" filter="url(#glow)"/>
+    <!-- center pupil -->
+    <circle cx="100" cy="50" r="8" fill="#2a0047"/>
+
+    <!-- subtle arrow to the right inside the pupil (points to growth/action) -->
+    <g transform="translate(106,44) rotate(0)" opacity="0.95">
+      <path d="M0 0 L10 6 L0 12 L0 8 L-10 8 L-10 4 L0 4 Z"
+            fill="white" opacity="0.88" transform="translate(0,0) scale(0.9)"/>
+    </g>
+
+    <!-- small accent tick (like "insight" spark) -->
+    <path d="M148 28 L156 26 L154 34"
+          stroke="url(#g)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.95"/>
+
+    <!-- faint inner gloss to add depth -->
+    <ellipse cx="90" cy="40" rx="28" ry="8" fill="rgba(255,255,255,0.06)" />
+  </g>
+</svg>

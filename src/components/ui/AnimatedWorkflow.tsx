@@ -12,7 +12,6 @@ import {
   IconLoader2,
   IconCheck
 } from '@tabler/icons-react';
-import { Exo_2 } from "next/font/google";
 
 // Tailwind keyframes for blinking and spinning
 const blinkKeyframes = `
@@ -45,14 +44,6 @@ interface WorkflowStep {
   svg: { x: number; y: number }; // SVG coordinates for the box center
 }
 
-// Path segments for the rect to follow (from center to center)
-const workflowPath = [
-  { from: { x: 41, y: 237 }, to: { x: 291, y: 237 } },
-  { from: { x: 291, y: 237 }, to: { x: 552, y: 237 } },
-  { from: { x: 552, y: 237 }, to: { x: 799, y: 237 } },
-  { from: { x: 799, y: 237 }, to: { x: 552, y: 62 } },
-  { from: { x: 552, y: 62 }, to: { x: 799, y: 62 } },
-];
 
 // Map each connection line to its corresponding path segment index
 const connectionLines = [
@@ -137,8 +128,6 @@ export const AnimatedWorkflow = () => {
   const [activeStep, setActiveStep] = useState(0);
   // Blinking state: "none" | "yellow" | "green"
   const [blink, setBlink] = useState<"none" | "yellow" | "green">("none");
-  // For smooth path animation
-  const [rectPos, setRectPos] = useState<{ x: number; y: number }>(workflowSteps[0].svg);
 
   // For moving rect state: "moving" | "processing" | "done"
   const [movingRectState, setMovingRectState] = useState<MovingRectState>("processing");
@@ -160,17 +149,15 @@ export const AnimatedWorkflow = () => {
 
   useEffect(() => {
     let isMounted = true;
-    let timeoutProcessing: NodeJS.Timeout;
     let timeoutDone: NodeJS.Timeout;
 
     setMovingRectState("processing");
     setMovingIconStep(activeStep);
 
-    const from = workflowSteps[activeStep].svg;
     const to = workflowSteps[getNextStep(activeStep)].svg;
     const connectionIdx = getConnectionIdx(activeStep);
 
-    timeoutProcessing = setTimeout(() => {
+    const timeoutProcessing = setTimeout(() => {
       if (!isMounted) return;
       setMovingRectState("done");
       timeoutDone = setTimeout(() => {
@@ -208,7 +195,6 @@ export const AnimatedWorkflow = () => {
           }
         }).then(() => {
           if (!isMounted) return;
-          setRectPos(to);
           setBlink("yellow");
           setTimeout(() => {
             setBlink("green");
@@ -218,10 +204,9 @@ export const AnimatedWorkflow = () => {
               if (activeStep === workflowSteps.length - 1) {
                 setTimeout(() => {
                   setActiveStep(0);
-                  setMovingRectState("processing");
-                  setMovingIconStep(0);
-                  setRectPos(workflowSteps[0].svg);
-                  setConnectionProgressArr(Array(CONNECTION_COUNT).fill(0));
+                   setMovingRectState("processing");
+                   setMovingIconStep(0);
+                   setConnectionProgressArr(Array(CONNECTION_COUNT).fill(0));
                 }, 1000);
               } else {
                 setActiveStep(getNextStep(activeStep));
@@ -284,24 +269,6 @@ export const AnimatedWorkflow = () => {
     );
   };
 
-  // For rendering a small static light on every box (top right)
-  const renderStaticLight = (stepIdx: number) => {
-    const { x, y } = workflowSteps[stepIdx].svg;
-    return (
-      <circle
-        key={`static-light-${stepIdx}`}
-        cx={x + rectHalf - lightRadius - 10}
-        cy={y - rectHalf + lightRadius}
-        r={lightRadius}
-        fill="#FFD600"
-        opacity={0.25}
-        style={{
-          filter: "drop-shadow(0 0 4px #FFD600)",
-          pointerEvents: "none"
-        }}
-      />
-    );
-  };
 
   // Render the icon inside the moving rect, depending on state
   const renderMovingRectIcon = () => {
