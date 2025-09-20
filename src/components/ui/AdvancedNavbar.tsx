@@ -152,6 +152,87 @@ const EyeLogo: React.FC<{ className?: string; size?: number }> = ({
   );
 };
 
+const OpsightEyeLogo: React.FC<{ className?: string; size?: number }> = ({
+  className,
+  size = 30,
+}) => {
+  return (
+    <motion.svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="url(#opsight-workflow-gradient)"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      style={{
+        display: "block",
+        minWidth: size,
+        minHeight: size,
+        maxWidth: "100%",
+        maxHeight: "100%",
+        flexShrink: 0,
+      }}
+      aria-label="Opsight Eye logo"
+      role="img"
+      initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+      animate={{ scale: 1, opacity: 1, rotate: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 180,
+        damping: 12,
+        duration: 0.8,
+      }}
+    >
+      <defs>
+        <linearGradient id="opsight-workflow-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#ec4899" />
+          <stop offset="0.5" stopColor="#a21caf" />
+          <stop offset="1" stopColor="#60a5fa" />
+        </linearGradient>
+        <radialGradient id="opsight-workflow-gradient-fill" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#60a5fa" />
+          <stop offset="100%" stopColor="#a21caf" />
+        </radialGradient>
+      </defs>
+      <motion.path
+        stroke="none"
+        d="M0 0h24v24H0z"
+        fill="none"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      />
+      <motion.path
+        d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 0.7, delay: 0.3, ease: "easeInOut" }}
+        stroke="url(#opsight-workflow-gradient)"
+      />
+      <motion.path
+        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
+        stroke="url(#opsight-workflow-gradient)"
+      />
+      <motion.circle
+        cx="12"
+        cy="12"
+        r="2"
+        fill="url(#opsight-workflow-gradient-fill)"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 200, damping: 10, delay: 1.1 }}
+      />
+    </motion.svg>
+  );
+};
+
 interface NavbarProps {
   children: React.ReactNode;
   className?: string;
