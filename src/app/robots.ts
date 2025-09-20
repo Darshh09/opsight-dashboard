@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://opsight.ai/sitemap.xml',
+    sitemap: 'https://opsight.darshitdev.in/sitemap.xml',
   }
 }

@@ -53,7 +53,7 @@ export default function LandingPage() {
     "@type": "SoftwareApplication",
     "name": "Opsight",
     "description": "AI-powered business analytics dashboard that transforms your business data into actionable insights with real-time KPIs, custom visualizations, and automated reporting.",
-    "url": "https://opsight.ai",
+    "url": "https://opsight.darshitdev.in",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "offers": {
@@ -65,7 +65,7 @@ export default function LandingPage() {
     "creator": {
       "@type": "Person",
       "name": "Darshit Shukla",
-      "url": "https://opsight.ai"
+      "url": "https://opsight.darshitdev.in"
     },
     "featureList": [
       "Real-time business analytics",
@@ -79,7 +79,7 @@ export default function LandingPage() {
       "Data visualization",
       "Business intelligence"
     ],
-    "screenshot": "https://opsight.ai/og-image.png",
+    "screenshot": "https://opsight.darshitdev.in/og-image.png",
     "softwareVersion": "1.0",
     "datePublished": "2024-01-01",
     "dateModified": new Date().toISOString().split('T')[0]
@@ -232,6 +232,40 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <HeroSection scrollYProgress={scrollYProgress} />
+
+      {/* SEO Content Section - Hidden but readable by search engines */}
+      <section className="sr-only">
+        <h2>About Opsight Business Analytics Dashboard</h2>
+        <p>
+          Opsight is a cutting-edge AI-powered business analytics dashboard designed to transform raw business data into actionable insights.
+          Our platform specializes in creating custom analytics solutions for SaaS companies, e-commerce businesses, and enterprise organizations.
+        </p>
+
+        <h3>Key Features of Our Analytics Platform</h3>
+        <ul>
+          <li>Real-time KPI monitoring and business intelligence dashboards</li>
+          <li>Custom data visualization and automated reporting systems</li>
+          <li>Integration with popular business tools like Stripe, HubSpot, and Google Analytics</li>
+          <li>AI-powered insights and predictive analytics for data-driven decision making</li>
+          <li>Mobile-responsive dashboard design for on-the-go business monitoring</li>
+          <li>Free pilot dashboard delivered within 48 hours of project initiation</li>
+        </ul>
+
+        <h3>Industries We Serve</h3>
+        <p>
+          Our business analytics solutions are perfect for SaaS startups, e-commerce platforms,
+          enterprise companies, marketing agencies, and any business looking to leverage data for growth.
+          We help businesses understand their customer behavior, track revenue metrics, monitor conversion rates,
+          and optimize their operations through comprehensive data analysis.
+        </p>
+
+        <h3>Why Choose Opsight for Your Business Analytics Needs</h3>
+        <p>
+          Unlike generic dashboard tools, Opsight provides personalized analytics solutions tailored to your specific business requirements.
+          Our team of data scientists and business intelligence experts work closely with you to understand your unique challenges
+          and create dashboards that provide meaningful insights for your business growth.
+        </p>
+      </section>
 
       {/* Problems Section */}
       <section id="problems" className="py-24">

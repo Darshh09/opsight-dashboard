@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Opsight - AI-Powered Business Analytics Dashboard | Real-Time Insights",
-    template: "%s | Opsight - Business Analytics Dashboard"
+    default: "Opsight - AI Business Analytics Dashboard",
+    template: "%s | Opsight Analytics"
   },
-  description: "Transform your business data into actionable insights with Opsight's AI-powered analytics dashboard. Real-time KPIs, custom visualizations, and automated reporting for SaaS, e-commerce, and enterprise businesses. Free pilot dashboard in 48 hours.",
+  description: "AI-powered business analytics dashboard with real-time KPIs, custom visualizations, and automated reporting. Free pilot in 48 hours.",
   keywords: [
     "business analytics dashboard",
     "AI-powered analytics",
@@ -44,16 +44,16 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://opsight.ai"),
+  metadataBase: new URL("https://opsight-dashboard.vercel.app"),
   alternates: {
-    canonical: "/",
+    canonical: "https://opsight-dashboard.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://opsight.ai",
-    title: "Opsight - AI-Powered Business Analytics Dashboard",
-    description: "Transform your business data into actionable insights with Opsight's AI-powered analytics dashboard. Real-time KPIs, custom visualizations, and automated reporting.",
+    url: "https://opsight-dashboard.vercel.app",
+    title: "Opsight - AI Business Analytics Dashboard",
+    description: "AI-powered business analytics dashboard with real-time KPIs, custom visualizations, and automated reporting. Free pilot in 48 hours.",
     siteName: "Opsight",
     images: [
       {
@@ -66,8 +66,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Opsight - AI-Powered Business Analytics Dashboard",
-    description: "Transform your business data into actionable insights with Opsight's AI-powered analytics dashboard. Real-time KPIs, custom visualizations, and automated reporting.",
+    title: "Opsight - AI Business Analytics Dashboard",
+    description: "AI-powered business analytics dashboard with real-time KPIs, custom visualizations, and automated reporting. Free pilot in 48 hours.",
     images: ["/og-image.png"],
     creator: "@opsight_ai",
   },
