@@ -90,10 +90,10 @@ const HeroSection = memo(function HeroSection({ scrollYProgress }: HeroSectionPr
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-5xl md:text-7xl font-bold text-white leading-tight"
           >
-            AI-Powered Dashboards
+            AI-Powered Business Analytics Dashboard
             <br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            That Unlock Growth
+            For Real-Time Insights
             </span>
           </motion.h1>
 
@@ -104,8 +104,8 @@ const HeroSection = memo(function HeroSection({ scrollYProgress }: HeroSectionPr
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            I build AI-powered dashboards & growth tools tailored to your business.
-            Stop guessing, start growing with data-driven insights.
+            Transform your business data into actionable insights with custom analytics dashboards.
+            Get real-time KPIs, automated reporting, and data-driven decisions in 48 hours.
           </motion.p>
 
           {/* CTA Buttons */}

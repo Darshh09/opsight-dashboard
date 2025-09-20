@@ -47,6 +47,44 @@ export default function LandingPage() {
   const useCasesRef = useRef(null);
   const aboutRef = useRef(null);
 
+  // Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Opsight",
+    "description": "AI-powered business analytics dashboard that transforms your business data into actionable insights with real-time KPIs, custom visualizations, and automated reporting.",
+    "url": "https://opsight.ai",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free pilot dashboard delivered in 48 hours"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Darshit Shukla",
+      "url": "https://opsight.ai"
+    },
+    "featureList": [
+      "Real-time business analytics",
+      "AI-powered insights",
+      "Custom dashboard development",
+      "Stripe analytics integration",
+      "HubSpot integration",
+      "Google Analytics dashboard",
+      "Automated reporting",
+      "KPI monitoring",
+      "Data visualization",
+      "Business intelligence"
+    ],
+    "screenshot": "https://opsight.ai/og-image.png",
+    "softwareVersion": "1.0",
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0]
+  };
+
   const servicesInView = useInView(servicesRef, { once: true });
   const useCasesInView = useInView(useCasesRef, { once: true });
   const aboutInView = useInView(aboutRef, { once: true });
@@ -182,7 +220,12 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen text-white overflow-hidden">
+    <main className="min-h-screen text-white overflow-hidden">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
       {/* Navigation */}
       <AdvancedNavbar />
@@ -864,6 +907,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
