@@ -17,6 +17,8 @@ import {
   ChevronDown
 } from 'lucide-react';
 import PilotStatusBadge from '@/components/ui/PilotStatusBadge';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import Logo from '@/components/ui/Logo';
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: Home, description: 'Business health dashboard' },
@@ -32,23 +34,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
       {/* Mobile sidebar */}
       <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-        <div className="fixed inset-y-0 left-0 flex w-72 flex-col bg-white dark:bg-gray-800 shadow-2xl">
-          <div className="flex h-16 items-center justify-between px-6 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Brain className="h-5 w-5 text-white" />
-              </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                OpsSight
-              </h1>
-            </div>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-y-0 left-0 flex w-72 flex-col bg-card border-r border-border shadow-2xl">
+          <div className="flex h-16 items-center justify-between px-6 border-b border-border">
+            <Logo size={32} animated={false} />
             <button
               onClick={() => setSidebarOpen(false)}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="text-muted-foreground hover:text-foreground p-2 rounded-lg hover:bg-accent transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
@@ -62,15 +57,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   href={item.href}
                   className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                   }`}
                   onClick={() => setSidebarOpen(false)}
                 >
-                  <item.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-400'}`} />
+                  <item.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-accent-foreground'}`} />
                   <div className="flex-1">
                     <div className="font-semibold">{item.name}</div>
-                    <div className={`text-xs ${isActive ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>
+                    <div className={`text-xs ${isActive ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
                       {item.description}
                     </div>
                   </div>
@@ -80,14 +75,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </nav>
 
           {/* Mobile user section */}
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+          <div className="border-t border-border p-4">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                 <User className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-medium text-gray-900 dark:text-white">Demo User</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">demo@opssight.com</div>
+                <div className="text-sm font-medium text-foreground">Demo User</div>
+                <div className="text-xs text-muted-foreground">demo@opssight.com</div>
               </div>
             </div>
           </div>
@@ -96,17 +91,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 shadow-lg">
+        <div className="flex flex-col flex-grow bg-card border-r border-border shadow-lg">
           {/* Logo section */}
-          <div className="flex h-16 items-center px-6 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Brain className="h-5 w-5 text-white" />
-              </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                OpsSight
-              </h1>
-            </div>
+          <div className="flex h-16 items-center px-6 border-b border-border">
+            <Logo size={32} animated={true} />
           </div>
 
           {/* Navigation */}
@@ -119,14 +107,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   href={item.href}
                   className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                   }`}
                 >
-                  <item.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-400'}`} />
+                  <item.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-accent-foreground'}`} />
                   <div className="flex-1">
                     <div className="font-semibold">{item.name}</div>
-                    <div className={`text-xs ${isActive ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>
+                    <div className={`text-xs ${isActive ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
                       {item.description}
                     </div>
                   </div>
@@ -136,14 +124,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </nav>
 
           {/* User section */}
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+          <div className="border-t border-border p-4">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                 <User className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-gray-900 dark:text-white truncate">Demo User</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 truncate">demo@opssight.com</div>
+                <div className="text-sm font-medium text-foreground truncate">Demo User</div>
+                <div className="text-xs text-muted-foreground truncate">demo@opssight.com</div>
               </div>
             </div>
           </div>
@@ -153,20 +141,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main content */}
       <div className="lg:pl-72">
         {/* Enhanced top bar */}
-        <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+        <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-border bg-card/80 backdrop-blur-sm px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
           <button
             type="button"
-            className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            className="-m-2.5 p-2.5 text-muted-foreground lg:hidden hover:bg-accent hover:text-accent-foreground rounded-lg transition-colors"
             onClick={() => setSidebarOpen(true)}
           >
             <Menu className="h-6 w-6" />
           </button>
 
           {/* Breadcrumb */}
-          <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <span>Dashboard</span>
             <span>/</span>
-            <span className="text-gray-900 dark:text-white font-medium">
+            <span className="text-foreground font-medium">
               {navigation.find(item => item.href === pathname)?.name || 'Overview'}
             </span>
           </div>
@@ -177,14 +165,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {/* User menu */}
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               <PilotStatusBadge />
-              <button className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+              <ThemeToggle />
+              <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
                 <Bell className="h-5 w-5" />
               </button>
 
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center space-x-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="flex items-center space-x-2 text-sm font-medium text-muted-foreground hover:text-foreground p-2 rounded-lg hover:bg-accent transition-colors"
                 >
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                     <User className="h-4 w-4 text-white" />
@@ -194,17 +183,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
-                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2">
+                  <div className="absolute right-0 mt-2 w-48 bg-card rounded-lg shadow-lg border border-border py-1 z-50">
+                    <button className="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center space-x-2">
                       <User className="h-4 w-4" />
                       <span>Profile</span>
                     </button>
-                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2">
+                    <button className="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center space-x-2">
                       <Settings className="h-4 w-4" />
                       <span>Settings</span>
                     </button>
-                    <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                    <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2">
+                    <div className="border-t border-border my-1"></div>
+                    <button className="w-full text-left px-4 py-2 text-sm text-destructive hover:bg-destructive/10 flex items-center space-x-2">
                       <LogOut className="h-4 w-4" />
                       <span>Sign out</span>
                     </button>

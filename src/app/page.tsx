@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useState, lazy, Suspense, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Logo from '@/components/ui/Logo';
 import {
   IconBrain,
   IconChartBar,
@@ -220,7 +221,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <main className="min-h-screen text-white overflow-hidden">
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
       {/* Structured Data for SEO */}
       <script
         type="application/ld+json"
@@ -287,13 +288,13 @@ export default function LandingPage() {
               <IconX className="h-4 w-4 mr-2" />
               Are These Your Struggles?
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Stop Losing Money on
               <span className="block bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
                 Hidden Problems
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               These common issues cost businesses thousands every month. Don&apos;t let them drain your revenue.
             </p>
           </motion.div>
@@ -372,13 +373,13 @@ export default function LandingPage() {
               <IconCurrencyDollar className="h-4 w-4 mr-2" />
               Choose Your Path
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Service Packages
               <span className="block bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 For Every Need
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               From free pilot builds to full custom solutions. Transparent pricing, no hidden fees.
             </p>
           </motion.div>
@@ -391,7 +392,7 @@ export default function LandingPage() {
                 animate={servicesInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
                 transition={{ duration: 0.8, delay: service.delay }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className={`relative  rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 ${service.color} ${
+                className={`relative rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 bg-card border-border ${service.color} ${
                   service.popular ? 'ring-4 ring-blue-400/20' : ''
                 }`}
               >
@@ -410,12 +411,18 @@ export default function LandingPage() {
                 )}
 
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">{service.name}</h3>
-                  <p className="text-gray-400 mb-6">{service.description}</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                    {service.name}
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    {service.description}
+                  </p>
                   <div className="mb-8">
-                    <span className="text-5xl font-bold text-white">{service.price}</span>
+                    <span className="text-5xl font-bold text-foreground">
+                      {service.price}
+                    </span>
                     {service.period !== 'one-time' && (
-                      <span className="text-gray-400">/{service.period}</span>
+                      <span className="text-muted-foreground">/{service.period}</span>
                     )}
                   </div>
                 </div>
@@ -435,7 +442,7 @@ export default function LandingPage() {
                       >
                         <IconCheck className="h-5 w-5 text-green-500 flex-shrink-0" />
                       </motion.div>
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-muted-foreground">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -473,13 +480,13 @@ export default function LandingPage() {
               <IconUsers className="h-4 w-4 mr-2" />
               Who I Work With
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Perfect For
               <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 These Businesses
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Custom dashboards tailored to your industry and business model.
             </p>
           </motion.div>
@@ -518,13 +525,13 @@ export default function LandingPage() {
               <IconCheck className="h-4 w-4 mr-2" />
               Client Success Stories
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               What Our Clients
               <span className="block bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Say About Us
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Real feedback from businesses that transformed their analytics with Opsight.
             </p>
           </motion.div>
@@ -557,10 +564,10 @@ export default function LandingPage() {
               <IconCode className="h-4 w-4 mr-2" />
               About the Builder
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Hi, I&apos;m Darshit 👋
             </h2>
-            <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               I specialize in building AI-powered dashboards & SaaS tools. With experience in Next.js, Node.js, microservices, and analytics, I help businesses unlock growth with real-time insights.
             </p>
           </motion.div>
@@ -573,7 +580,9 @@ export default function LandingPage() {
               className="space-y-6"
             >
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-white">My Expertise</h3>
+                <h3 className="text-2xl font-bold text-foreground">
+                  My Expertise
+                </h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { icon: IconCode, label: 'Next.js & React' },
@@ -586,10 +595,12 @@ export default function LandingPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={aboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center space-x-3 p-4 bg-gray-800 rounded-xl shadow-lg"
+                      className="flex items-center space-x-3 p-4 rounded-xl shadow-lg bg-card border border-border"
                     >
                       <skill.icon className="h-6 w-6 text-blue-600" />
-                      <span className="text-gray-300 font-medium">{skill.label}</span>
+                      <span className="font-medium text-muted-foreground">
+                        {skill.label}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -602,38 +613,40 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="space-y-6"
             >
-              <div className=" rounded-3xl p-8 border border-blue-200 dark:border-blue-800">
-                <h3 className="text-2xl font-bold text-white mb-4">Let&apos;s Connect</h3>
+              <div className="rounded-3xl p-8 border bg-card border-border">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
+                  Let&apos;s Connect
+                </h3>
                 <div className="space-y-4">
                   <motion.a
                     whileHover={{ scale: 1.05 }}
                     href="https://github.com/Darshh09"
           target="_blank"
           rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300"
+                    className="flex items-center space-x-3 p-3 rounded-xl hover:shadow-lg transition-all duration-300 bg-muted border border-border"
                   >
-                    <IconBrandGithub className="h-6 w-6 text-gray-300" />
-                    <span className="text-gray-300">GitHub Portfolio</span>
-                    <IconExternalLink className="h-4 w-4 text-gray-400" />
+                    <IconBrandGithub className="h-6 w-6 text-muted-foreground" />
+                    <span className="text-muted-foreground">GitHub Portfolio</span>
+                    <IconExternalLink className="h-4 w-4 text-muted-foreground" />
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.05 }}
                     href="https://linkedin.com/in/darshitshukla"
           target="_blank"
           rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300"
+                    className="flex items-center space-x-3 p-3 rounded-xl hover:shadow-lg transition-all duration-300 bg-muted border border-border"
                   >
                     <IconBrandLinkedin className="h-6 w-6 text-blue-600" />
-                    <span className="text-gray-300">LinkedIn Profile</span>
-                    <IconExternalLink className="h-4 w-4 text-gray-400" />
+                    <span className="text-muted-foreground">LinkedIn Profile</span>
+                    <IconExternalLink className="h-4 w-4 text-muted-foreground" />
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.05 }}
                     href="mailto:darshitshukla1777@gmail.com"
-                    className="flex items-center space-x-3 p-3 bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300"
+                    className="flex items-center space-x-3 p-3 rounded-xl hover:shadow-lg transition-all duration-300 bg-muted border border-border"
                   >
                     <IconMail className="h-6 w-6 text-green-600" />
-                    <span className="text-gray-300">darshitshukla1777@gmail.com</span>
+                    <span className="text-muted-foreground">darshitshukla1777@gmail.com</span>
                   </motion.a>
                 </div>
               </div>
@@ -662,13 +675,13 @@ export default function LandingPage() {
               <IconPlayerPlay className="h-4 w-4 mr-2" />
               Interactive Demo
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Experience the Full
               <span className="block bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Dashboard Platform
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               Experience the actual dashboard with real data and features. Navigate through all sections, explore analytics, and see the pilot version in action.
             </p>
 
@@ -728,8 +741,10 @@ export default function LandingPage() {
                 >
                   <feature.icon className="h-8 w-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -739,7 +754,7 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 " />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 [background-color:var(--background)]" />
         <motion.div
           animate={{
             scale: [1, 1.1, 1],
@@ -783,11 +798,17 @@ export default function LandingPage() {
               Ready to Transform Your SaaS?
             </motion.div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+            <h2
+              className="text-5xl md:text-6xl font-bold mb-8"
+              style={{ color: 'var(--foreground)' }}
+            >
               Let&apos;s Build Your
               <span className="block">Custom Dashboard 🚀</span>
             </h2>
-            <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+            <p
+              className="text-xl mb-12 max-w-2xl mx-auto"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
               Ready to transform your business with AI-powered insights? Let&apos;s start with a free pilot build.
             </p>
 
@@ -821,7 +842,14 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="text-white py-16">
+      <footer
+        id="contact"
+        className="py-16"
+        style={{
+          backgroundColor: 'var(--background)',
+          color: 'var(--foreground)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -829,14 +857,7 @@ export default function LandingPage() {
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-2 mb-6 cursor-pointer"
               >
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center"
-                >
-                  <IconBrain className="h-6 w-6 text-white" />
-                </motion.div>
-                <span className="text-2xl font-bold">OpsSight</span>
+                <Logo size={40} animated={true} showText={true} />
               </motion.div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Custom AI-powered dashboards & growth tools tailored to your business. Built by Darshit.
@@ -915,7 +936,7 @@ export default function LandingPage() {
       {/* Dashboard Preview Modal */}
       {showDashboardPreview && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black backdrop-blur-sm"
           onClick={() => setShowDashboardPreview(false)}
         >
           <motion.div

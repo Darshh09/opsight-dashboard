@@ -11,6 +11,8 @@ import {
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import AnimatedButton from "./AnimatedButton";
+import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 // --- Tabler Eye SVG Logo (static, mobile/desktop responsive) ---
 // Use the same gradient as the "OPSIGHT" text for the SVG
@@ -280,7 +282,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 100) {
+    if (latest > 200) {
       setVisible(true);
     } else {
       setVisible(false);
@@ -312,7 +314,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
+        width: visible ? "60%" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -320,14 +322,17 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         stiffness: 200,
         damping: 50,
       }}
-      style={{
-        minWidth: "1000px",
-      }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-black/90 px-8 py-3 lg:flex backdrop-blur-md border border-gray-800",
-        visible && "bg-black/95 shadow-2xl",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-8 py-3 lg:flex backdrop-blur-md border",
+        visible && "shadow-2xl",
         className,
       )}
+      style={{
+        minWidth: "1000px",
+        backgroundColor: 'var(--card)',
+        borderColor: 'var(--border)',
+        opacity: visible ? 0.95 : 0.9
+      }}
     >
       {children}
     </motion.div>
@@ -341,22 +346,33 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-8 text-sm font-medium text-gray-300 transition duration-200 hover:text-white lg:flex lg:space-x-8",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-8 text-sm font-medium transition duration-200 lg:flex lg:space-x-8",
         className,
       )}
+      style={{ color: 'var(--muted-foreground)' }}
     >
       {items.map((item, idx) => (
         <a
-          onMouseEnter={() => setHovered(idx)}
+          onMouseEnter={(e) => {
+            setHovered(idx);
+            e.currentTarget.style.color = 'var(--foreground)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--muted-foreground)';
+          }}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-gray-300 hover:text-white whitespace-nowrap"
+          className="relative px-4 py-2 whitespace-nowrap transition-colors"
+          style={{
+            color: 'var(--muted-foreground)',
+          }}
           key={`link-${idx}`}
           href={item.link}
         >
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-800/50"
+              className="absolute inset-0 h-full w-full rounded-full"
+              style={{ backgroundColor: 'var(--accent)' }}
             />
           )}
           <span className="relative z-20">{item.name}</span>
@@ -374,11 +390,11 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
+        width: visible ? "98%" : "100%",
+        paddingRight: visible ? "8px" : "0px",
+        paddingLeft: visible ? "8px" : "0px",
+        borderRadius: visible ? "8px" : "2rem",
+        y: visible ? 10 : 0,
       }}
       transition={{
         type: "spring",
@@ -386,10 +402,15 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 50,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-black/90 px-0 py-2 lg:hidden backdrop-blur-md border border-gray-800",
-        visible && "bg-black/95 shadow-2xl",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between px-0 py-2 lg:hidden backdrop-blur-md border",
+        visible && "shadow-2xl",
         className,
       )}
+      style={{
+        backgroundColor: 'var(--card)',
+        borderColor: 'var(--border)',
+        opacity: visible ? 0.95 : 0.9
+      }}
     >
       {children}
     </motion.div>
@@ -425,9 +446,14 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-black/95 px-4 py-8 shadow-2xl border border-gray-800 backdrop-blur-md mr-4",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg px-4 py-8 shadow-2xl border backdrop-blur-md mr-4",
             className,
           )}
+          style={{
+            backgroundColor: 'var(--card)',
+            borderColor: 'var(--border)',
+            opacity: 0.95
+          }}
         >
           {children}
         </motion.div>
@@ -446,9 +472,10 @@ export const MobileNavToggle = ({
   // Make the icon mobile compatible: responsive sizing and touch target
   return isOpen ? (
     <IconX
-      className="text-white cursor-pointer w-8 h-8 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 p-1"
+      className="cursor-pointer w-8 h-8 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 p-1"
       onClick={onClick}
       style={{
+        color: 'var(--foreground)',
         touchAction: "manipulation",
         minWidth: "2rem",
         minHeight: "2rem",
@@ -464,9 +491,10 @@ export const MobileNavToggle = ({
     />
   ) : (
     <IconMenu2
-      className="text-white cursor-pointer w-8 h-8 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 p-1"
+      className="cursor-pointer w-8 h-8 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 p-1"
       onClick={onClick}
       style={{
+        color: 'var(--foreground)',
         touchAction: "manipulation",
         minWidth: "2rem",
         minHeight: "2rem",
@@ -483,47 +511,19 @@ export const MobileNavToggle = ({
   );
 };
 
-// --- NavbarLogo using the static Tabler Eye SVG and animated "Opsight" text ---
-// Now mobile compatible: logo and text scale responsively
+// --- NavbarLogo using the new Logo component ---
 export const NavbarLogo = ({ size = 36, className = "" }: { size?: number, className?: string }) => {
   const router = useRouter();
 
   return (
-    <motion.a
-      href="#"
-      onClick={(e) => {
-        e.preventDefault();
-        router.push('/');
-      }}
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-white min-w-0 flex-shrink-0"
+    <motion.div
+      onClick={() => router.push('/')}
+      className={`cursor-pointer ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      style={{ userSelect: "none" }}
     >
-      {/* Animated logo with mobile-optimized sizing */}
-      <span className="flex items-center justify-center rounded-lg flex-shrink-0">
-        <EyeLogo
-          size={size}
-          className={className ? className : "w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11"}
-        />
-      </span>
-      <motion.span
-        className="font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-400 bg-clip-text text-transparent text-lg tracking-tight
-          sm:text-lg
-          md:text-xl
-          lg:text-xl
-        "
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.1, duration: 0.7, type: "spring" }}
-        style={{
-          letterSpacing: "-0.01em",
-          fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-        }}
-      >
-        OPSIGHT
-      </motion.span>
-    </motion.a>
+      <Logo size={size} animated={true} showText={true} />
+    </motion.div>
   );
 };
 
@@ -595,7 +595,8 @@ export default function AdvancedNavbar() {
           items={navItems}
           onItemClick={() => setIsOpen(false)}
         />
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
+          <ThemeToggle />
           <AnimatedButton
             onClick={() => router.push('/auth/signup')}
             variant="gradient"
@@ -628,12 +629,24 @@ export default function AdvancedNavbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => handleNavClick(item.link)}
-              className="text-gray-300 hover:text-white transition-colors"
+              className="transition-colors"
+              style={{
+                color: 'var(--muted-foreground)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--foreground)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--muted-foreground)';
+              }}
             >
               {item.name}
             </motion.a>
           ))}
-          <div className="flex flex-col space-y-4 w-full pt-4 border-t border-gray-700">
+          <div className="flex flex-col space-y-4 w-full pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+            <div className="flex items-center justify-center">
+              <ThemeToggle />
+            </div>
             <AnimatedButton
               onClick={() => router.push('/auth/signup')}
               variant="gradient"
