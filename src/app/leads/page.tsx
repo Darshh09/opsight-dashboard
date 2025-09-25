@@ -7,9 +7,7 @@ import {
   UserPlus,
   CreditCard,
   CheckCircle,
-  Upload,
-  Download,
-  FileText
+  Download
 } from 'lucide-react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import EnhancedChartCard from '@/components/ui/EnhancedChartCard';
@@ -68,63 +66,10 @@ const dropoffData = [
   { stage: 'Paid to Retained', dropoff: 25, previousDropoff: 30 }
 ];
 
-// Enhanced funnel distribution data
-const funnelDistributionData = [
-  { stage: 'Website Visits', count: 1000, color: '#3b82f6', conversionRate: 100 },
-  { stage: 'Sign-ups', count: 300, color: '#10b981', conversionRate: 30 },
-  { stage: 'Paid Plans', count: 80, color: '#f59e0b', conversionRate: 8 },
-  { stage: 'Retained', count: 60, color: '#ef4444', conversionRate: 6 }
-];
 
 export default function LeadsPage() {
   const { isPilotMode, pilotLimits, canUploadCsv } = usePilot();
-  const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDragIn = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      setDragActive(true);
-    }
-  };
-
-  const handleDragOut = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (!canUploadCsv(file.size)) {
-        alert(`🚫 File size exceeds ${pilotLimits.maxCsvFileSize}MB limit in pilot mode. Upgrade to Premium for larger file uploads!`);
-        return;
-      }
-      setSelectedFile(file);
-    }
-  };
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (!canUploadCsv(file.size)) {
-        alert(`🚫 File size exceeds ${pilotLimits.maxCsvFileSize}MB limit in pilot mode. Upgrade to Premium for larger file uploads!`);
-        return;
-      }
-      setSelectedFile(file);
-    }
-  };
 
   return (
     <DashboardLayout>

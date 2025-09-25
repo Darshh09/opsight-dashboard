@@ -1,16 +1,12 @@
 'use client';
 
-import { useState, useEffect, memo, useCallback, Suspense, lazy } from 'react';
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   DollarSign,
   Users,
   XCircle,
   TrendingDown,
-  LucideIcon,
-  BarChart3,
-  TrendingUp,
-  Brain,
   Target,
   BarChart,
   Bell,
@@ -19,10 +15,8 @@ import {
 import EyeIcon from '@/components/ui/EyeIcon';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import KPICard from '@/components/ui/KPICard';
-import EnhancedChartCard from '@/components/ui/EnhancedChartCard';
 import AIInsightsBox from '@/components/ui/AIInsightsBox';
 import { ChartSkeleton, KPISkeleton } from '@/components/ui/LoadingSkeleton';
-import { PerformanceCard } from '@/components/ui/PerformanceCard';
 
 // Lazy load heavy chart components
 const GlowingLineChart = lazy(() => import('@/components/charts/GlowingLineChart'));
@@ -54,22 +48,6 @@ const customerData = [
 ];
 
 
-// Memoized Chart Card component
-const MemoizedChartCard = memo(function MemoizedChartCard({
-  title,
-  children
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <PerformanceCard className="p-6" hover={true}>
-      <EnhancedChartCard title={title}>
-        {children}
-      </EnhancedChartCard>
-    </PerformanceCard>
-  );
-});
 
 export default function DashboardPage() {
   const [aiInsights, setAiInsights] = useState<string>('');

@@ -16,7 +16,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Users, Eye, ShoppingCart, CreditCard } from "lucide-react";
+import { TrendingUp, Users, Eye, ShoppingCart, CreditCard, LucideIcon } from "lucide-react";
 
 const chartData = [
   { stage: "Visitors", count: 1000, fill: "var(--color-visitors)", icon: Eye },
@@ -48,7 +48,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface FunnelDistributionChartProps {
-  data?: Array<{ stage: string; count: number; fill: string; icon: any }>;
+  data?: Array<{ stage: string; count: number; fill: string; icon: LucideIcon }>;
   className?: string;
 }
 
@@ -58,7 +58,7 @@ export default function FunnelDistributionChart({
 }: FunnelDistributionChartProps) {
   // Calculate conversion rates
   const totalVisitors = data[0]?.count || 0;
-  const conversionRates = data.map((item, index) => {
+  const conversionRates = data.map((item) => {
     const rate = totalVisitors > 0 ? (item.count / totalVisitors) * 100 : 0;
     return { ...item, conversionRate: rate };
   });
@@ -132,7 +132,7 @@ export default function FunnelDistributionChart({
 
           {/* Legend with conversion rates */}
           <div className="mt-4 grid grid-cols-2 gap-3">
-            {conversionRates.map((item, index) => {
+            {conversionRates.map((item) => {
               const IconComponent = item.icon;
               return (
                 <div key={item.stage} className="flex items-center space-x-2">

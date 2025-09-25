@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useInView } from 'framer-motion';
 import { useState, lazy, Suspense, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/ui/Logo';

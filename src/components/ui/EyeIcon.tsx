@@ -24,20 +24,20 @@ const EyeIcon: React.FC<EyeIconProps> = ({
     hover: {
       scale: 1.1,
       rotate: 5,
-      transition: { type: "spring", stiffness: 300, damping: 15 }
+      transition: { type: "spring" as const, stiffness: 300, damping: 15 }
     }
   };
 
   const pathVariants = {
     initial: { pathLength: 0, opacity: 0 },
     animate: { pathLength: 1, opacity: 1 },
-    transition: { duration: 0.8, ease: "easeInOut" }
+    transition: { duration: 0.8, ease: "easeInOut" as const }
   };
 
   const circleVariants = {
     initial: { scale: 0, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { type: "spring", stiffness: 200, damping: 10, delay: 0.5 }
+    transition: { type: "spring" as const, stiffness: 200, damping: 10, delay: 0.5 }
   };
 
   const EyeComponent = animated ? motion.svg : "svg";
@@ -51,8 +51,8 @@ const EyeIcon: React.FC<EyeIconProps> = ({
     viewBox: "0 0 24 24",
     fill: "none",
     strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
     className,
     style: {
       display: "block",
@@ -71,7 +71,7 @@ const EyeIcon: React.FC<EyeIconProps> = ({
     animate: eyeVariants.animate,
     whileHover: eyeVariants.hover,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 180,
       damping: 12,
       duration: 0.8,
